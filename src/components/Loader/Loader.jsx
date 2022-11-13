@@ -1,19 +1,17 @@
-export default Loader = ({ onSubmit }) => {
-  return (
-    <header class="searchbar">
-      <form class="form">
-        <button type="submit" class="button" onSubmit={onSubmit}>
-          <span class="button-label">Search</span>
-        </button>
+import { Triangle } from 'react-loader-spinner';
 
-        <input
-          class="input"
-          type="text"
-          autocomplete="off"
-          autofocus
-          placeholder="Search images and photos"
-        />
-      </form>
-    </header>
+const Loader = () => {
+  return (
+    <Triangle
+      height="80"
+      width="80"
+      color="#4fa94d"
+      ariaLabel="triangle-loading"
+      wrapperStyle={{}}
+      wrapperClassName=""
+      visible={true}
+    />
   );
 };
+
+export default Loader;

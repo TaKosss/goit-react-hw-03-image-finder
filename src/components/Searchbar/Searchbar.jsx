@@ -22,7 +22,7 @@ export default class Searchbar extends Component {
     });
 
     if (this.state.query.trim() === '') {
-      toast.error('Please, try againe!');
+      toast.error('Please enter a word!');
       return;
     }
     this.props.onSubmit(this.state.query);
