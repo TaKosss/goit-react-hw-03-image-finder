@@ -1,4 +1,3 @@
-import Modal from 'components/Modal';
 import Searchbar from 'components/Searchbar';
 import Button from 'components/Button';
 import ImageGallery from 'components/ImageGallery';
@@ -18,9 +17,7 @@ export default class App extends Component {
     totalPages: 0,
     status: 'idle',
     images: [],
-    currentImage: {},
     error: '',
-    showModal: false,
   };
 
   componentDidUpdate(_, prevState) {
@@ -74,42 +71,18 @@ export default class App extends Component {
     });
   };
 
-  onGalleryClickHandle = imageId => {
-    const currentImage = this.state.images.find(item => {
-      return item.id === Number(imageId);
-    });
-    this.setState({
-      currentImage: currentImage,
-      showModal: true,
-    });
-  };
-
-  onCloseModal = () => {
-    this.setState({ showModal: false });
-  };
-
   render() {
-    const { showModal, currentImage, totalPages, pageNumber, images, status } =
-      this.state;
+    const { totalPages, pageNumber, images, status } = this.state;
 
     return (
       <>
         <Box>
           <Searchbar onSubmit={this.handleSearchbarSubmit} />
-          {images.length !== 0 && (
-            <ImageGallery images={images} onClick={this.onGalleryClickHandle} />
-          )}
+          {!!images.length && <ImageGallery images={images} />}
 
           {status === 'pending' && <Loader />}
           {totalPages > pageNumber && (
             <Button onClick={this.onLoadMoreClick}>Load more</Button>
-          )}
-          {showModal && (
-            <Modal
-              imageUrl={currentImage.largeImageURL}
-              alt={currentImage.tags}
-              onCloseModal={this.onCloseModal}
-            />
           )}
 
           {status === 'error' && <ErrorMessege />}
